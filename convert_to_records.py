@@ -68,7 +68,6 @@ import random
 import sys
 import threading
 
-
 import numpy as np
 import tensorflow as tf
 
@@ -200,7 +199,6 @@ def _process_image(filename, coder):
   if _is_png(filename):
     print('Converting PNG to JPEG for %s' % filename)
     image_data = coder.png_to_jpeg(image_data)
-
   # Decode the RGB JPEG.
   image = coder.decode_jpeg(image_data)
 
