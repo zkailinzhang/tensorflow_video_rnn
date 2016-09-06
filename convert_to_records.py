@@ -78,12 +78,12 @@ tf.app.flags.DEFINE_string('validation_directory', '/Users/dgu/Documents/project
 tf.app.flags.DEFINE_string('output_directory', '/Users/dgu/Documents/projects/tensorflow/rnn/data/sharded_data',
                            'Output data directory')
 
-tf.app.flags.DEFINE_integer('train_shards', 1,
+tf.app.flags.DEFINE_integer('train_shards', 64,
                             'Number of shards in training TFRecord files.')
-tf.app.flags.DEFINE_integer('validation_shards', 1,
+tf.app.flags.DEFINE_integer('validation_shards', 8,
                             'Number of shards in validation TFRecord files.')
 
-tf.app.flags.DEFINE_integer('num_threads', 1,
+tf.app.flags.DEFINE_integer('num_threads', 4,
                             'Number of threads to preprocess the images.')
 
 # The labels file contains a list of valid labels are held in this file.
