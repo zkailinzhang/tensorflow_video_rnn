@@ -15,8 +15,8 @@ def main(_):
     init = tf.initialize_all_variables()
     sess.run(init)
     # print out the images
-    dataset = LCAData('train')
-    images, labels = inputs(dataset)
+    train_dataset = LCAData('train')
+    images_op, labels_op = inputs(train_dataset)
     # merge all the summary and then write then out to the writer
     summary_op = tf.merge_all_summaries()
     # writer for tensorboard visualization
@@ -27,7 +27,8 @@ def main(_):
     # start all the queue thread
     threads = tf.train.start_queue_runners(sess=sess, coord=coord)
     # run the ops for two iteration
-    summary_result, image, label = sess.run([summary_op, images, labels])
+    summary_result, images, labels = sess.run([summary_op, images_op, labels_op])
+    print(len(labels))
     # write the summary result to the writer
     writer.add_summary(summary_result)
     # request to stop the input queue

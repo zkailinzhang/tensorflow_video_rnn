@@ -71,9 +71,9 @@ import threading
 import numpy as np
 import tensorflow as tf
 
-tf.app.flags.DEFINE_string('train_directory', '/Users/dgu/Documents/projects/tensorflow/rnn/data/train_data',
+tf.app.flags.DEFINE_string('train_directory', '/Volumes/dgu\'s passport/datasets/(action)LCA/data/data/train_data',
                            'Training data directory')
-tf.app.flags.DEFINE_string('validation_directory', '/Users/dgu/Documents/projects/tensorflow/rnn/data/validation_data',
+tf.app.flags.DEFINE_string('validation_directory', '/Volumes/dgu\'s passport/datasets/(action)LCA/data/data/validation_data',
                            'Validation data directory')
 tf.app.flags.DEFINE_string('output_directory', '/Users/dgu/Documents/projects/tensorflow/rnn/data/sharded_data',
                            'Output data directory')
@@ -85,7 +85,8 @@ tf.app.flags.DEFINE_integer('validation_shards', 8,
 
 tf.app.flags.DEFINE_integer('num_threads', 4,
                             'Number of threads to preprocess the images.')
-
+tf.app.flags.DEFINE_boolean('sequence_random', False,
+                            'Determine whether to shuffle the image order or not.')
 # The labels file contains a list of valid labels are held in this file.
 # Assumes that the file contains entries as such:
 #   dog
@@ -93,7 +94,7 @@ tf.app.flags.DEFINE_integer('num_threads', 4,
 #   flower
 # where each line corresponds to a label. We map each label contained in
 # the file to an integer corresponding to the line number starting from 0.
-tf.app.flags.DEFINE_string('labels_file', '/Users/dgu/Documents/projects/tensorflow/rnn/data/label', 'Labels file')
+tf.app.flags.DEFINE_string('labels_file', '/Volumes/dgu\'s passport/datasets/(action)LCA/data/data/label', 'Labels file')
 
 
 FLAGS = tf.app.flags.FLAGS
@@ -378,13 +379,14 @@ def _find_image_files(data_dir, labels_file):
   # Shuffle the ordering of all image files in order to guarantee
   # random ordering of the images with respect to label in the
   # saved TFRecord files. Make the randomization repeatable.
-  shuffled_index = range(len(filenames))
-  random.seed(12345)
-  random.shuffle(shuffled_index)
+  if FLAGS.sequence_random:
+    shuffled_index = range(len(filenames))
+    random.seed(12345)
+    random.shuffle(shuffled_index)
 
-  filenames = [filenames[i] for i in shuffled_index]
-  texts = [texts[i] for i in shuffled_index]
-  labels = [labels[i] for i in shuffled_index]
+    filenames = [filenames[i] for i in shuffled_index]
+    texts = [texts[i] for i in shuffled_index]
+    labels = [labels[i] for i in shuffled_index]
 
   print('Found %d JPEG files across %d labels inside %s.' %
         (len(filenames), len(unique_labels), data_dir))
