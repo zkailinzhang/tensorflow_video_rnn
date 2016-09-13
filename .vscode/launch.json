@@ -14,10 +14,10 @@
                 "RedirectOutput"
             ],
             "args": [
-                "--train_directory=/Users/dgu/Documents/projects/tensorflow/rnn/data/train_data",
-                "--validation_directory=/Users/dgu/Documents/projects/tensorflow/rnn/data/validation_data",
-                "--output_directory=/Users/dgu/Documents/projects/tensorflow/rnn/data/sharded_data",
-                "--labels_file=/Users/dgu/Documents/projects/tensorflow/rnn/data/label",
+                "--train_directory=/Volumes/passport/datasets/action_LCA/video_data/train_data",
+                "--validation_directory=/Volumes/passport/datasets/action_LCA/video_data/validation_data",
+                "--output_directory=/Users/dgu/Desktop/sharded_data",
+                "--labels_file=/Volumes/passport/datasets/action_LCA/video_data/label",
                 "--data_dir=/Users/dgu/Documents/projects/tensorflow/rnn/data/sharded_data"
             ]
         },
